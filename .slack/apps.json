@@ -1,0 +1,12 @@
+{
+  "apps": {
+    "E06T3H2C6UQ": {
+      "app_id": "A06STHLKUD8",
+      "enterprise_id": "E06T3H2C6UQ",
+      "IsDev": false,
+      "team_domain": "botifyme",
+      "team_id": "E06T3H2C6UQ"
+    }
+  },
+  "default": "botifyme"
+}
