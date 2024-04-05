@@ -18,8 +18,9 @@ export const AskPermissionMessage = DefineFunction({
         type: Schema.types.string,
         description: "Question",
       },
-      channel: {
-        type: Schema.slack.types.channel_id,
+      channel_id: {
+        type: Schema.types.string,
+        description: "Channel to send message to",
       },
     },
     required: ["question"],
@@ -30,8 +31,8 @@ export const AskPermissionMessage = DefineFunction({
         type: Schema.types.string,
         description: "User's answer",
       },
-      channel: {
-        type: Schema.slack.types.channel_id,
+      channel_id: {
+        type: Schema.types.string,
       },
     },
     required: ["answer"],
@@ -47,26 +48,19 @@ export const AskPermissionMessage = DefineFunction({
 export default SlackFunction(
   AskPermissionMessage,
   async ({ inputs, client }) => {
-    const { question } = inputs;
-    // const severityEmoji: { [key: string]: string } = {
-    //   low: ":white_circle:",
-    //   medium: ":large_blue_circle:",
-    //   high: ":red_circle:",
-    // };
+    const { question, channel_id } = inputs;
 
     // Send a message to channel using a nicely formatted
     // message using block elements from Block Kit.
     // https://api.slack.com/block-kit
-    // const r = await client.chat.postMessage({
-    //   blocks: [
-    //     {
-    //       "type": "section",
-    //       "text": {
-    //         "type": "mrkdwn",
-    //         "text": `*Question asked:*\n${question}\n\n`,
-    //       },
-    //     },
-    //   ],
+    await client.chat.postMessage({
+      channel: channel_id || "C06STDB31C1",
+      text: `${question}`,
+    });
+
+    // app.action("approve_button", async ({ complete, fail }) => {
+    //   // Signal the function has completed once the button is clicked
+    //   await complete({ outputs: { message: "Request approved 👍" } });
     // });
 
     // Return all inputs as outputs for consumption in subsequent functions

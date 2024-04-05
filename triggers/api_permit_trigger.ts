@@ -11,6 +11,9 @@ const permitAPI: Trigger<typeof APIPermitWebhookWorkflow.definition> = {
     question: {
       value: "{{data.question}}",
     },
+    channel_id: {
+      value: "{{data.channel_id}}",
+    },
   },
 };
 
